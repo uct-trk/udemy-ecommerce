@@ -1,0 +1,15 @@
+{
+  "name": "udemy_ecommerce",
+  "version": "2.0.0",
+  "description": "udemy eCommerce",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Ugurcan TURK",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
