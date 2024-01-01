@@ -13,7 +13,7 @@ const cartSlice = createSlice({
       const item = action.payload;
 
       const existItem = state?.cartItems.find(
-        (product) => product?._id === item.payload?._id
+        (product) => product?._id === item?._id
       );
 
       if (existItem) {
