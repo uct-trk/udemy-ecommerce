@@ -24,11 +24,19 @@ const cartSlice = createSlice({
         state.cartItems = [...state.cartItems, item];
       }
 
+      // fiyat hesaplarını yapan methot
       updateCart(state);
     },
+    removeFromCart: (state, action) => {
+      const id = action.payload;
+      state.cartItems = state.cartItems.filter((item) => item._id !== id);   
+
+      // fiyat hesaplarını yapan methot
+      updateCart(state);
+    }
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
