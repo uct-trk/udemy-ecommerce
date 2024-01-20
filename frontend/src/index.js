@@ -1,7 +1,7 @@
 import React from "react";
 import { store } from "./store";
 import { Provider } from "react-redux";
-import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./assets/styles/bootstrap.custom.css";
