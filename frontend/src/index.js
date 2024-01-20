@@ -1,7 +1,7 @@
 import React from "react";
 import { store } from "./store";
 import { Provider } from "react-redux";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./assets/styles/bootstrap.custom.css";
@@ -12,6 +12,7 @@ import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingScreen from "./screens/ShippingScreen";
+import PrivateRoute from "./components/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -39,8 +40,14 @@ const router = createBrowserRouter([
         element: <RegisterScreen />,
       },
       {
-        path: "/shipping",
-        element: <ShippingScreen />,
+        path: "",
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/shipping",
+            element: <ShippingScreen />,
+          },
+        ],
       },
     ],
   },
