@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Message from "../../components/Message";
@@ -7,8 +7,10 @@ import { useGetOrdersQuery } from "../../slices/orderApiSlice";
 import { FaTimes } from "react-icons/fa";
 
 const OrderListScreen = () => {
-  const { data: orders, isLoading, isError } = useGetOrdersQuery();
-  
+  const { data: orders, isLoading, isError, refetch } = useGetOrdersQuery();
+  useEffect(() => {
+    refetch();
+  }, []);
   return (
     <>
       <h1>Orders</h1>
