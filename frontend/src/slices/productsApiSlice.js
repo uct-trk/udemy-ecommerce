@@ -8,7 +8,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         url: PRODUCTS_URL,
       }),
       keepUnusedDataFor: 50000,
-      providesTags:["Product"]
+      providesTags:["Products"]
     }),
     getProductDetails: builder.query({
       query: (productId) => ({
@@ -35,10 +35,8 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Product"],
-      onSuccess: async (data, { dispatch }) => {
-        await dispatch(useGetProductsQuery.refetch());
-      },
+      invalidatesTags: ["Products"],
+   
     }),
   }),
 });
