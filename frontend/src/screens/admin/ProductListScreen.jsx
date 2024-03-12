@@ -3,17 +3,33 @@ import { Button, Table, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import { useGetProductsQuery } from "../../slices/productsApiSlice";
+import {
+  useGetProductsQuery,
+  useCreateProductMutation,
+} from "../../slices/productsApiSlice";
 import { FaTimes, FaEdit, FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const ProductListScreen = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery();
+  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  const [createProduct, { isLoading: loadingCreate }] =
+    useCreateProductMutation();
   console.log(error);
   console.log(products);
 
-  const deleteHandler = (id) => {
+  const createProductHandler = async () => {
+    if (window.confirm("Are you sure you want to create")) {
+      try {
+        await createProduct().unwrap();
+        refetch();
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
+  };
 
-  }
+  const deleteHandler = (id) => {};
   return (
     <>
       <Row>
@@ -21,11 +37,13 @@ const ProductListScreen = () => {
           <h1>Products</h1>
         </Col>
         <Col className="text-end">
-          <Button className="btn-sm m-3">
+          <Button className="btn-sm m-3" onClick={createProductHandler}>
             <FaEdit /> Create Product
           </Button>
         </Col>
       </Row>
+
+      {loadingCreate && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -55,8 +73,12 @@ const ProductListScreen = () => {
                         <FaEdit />
                       </Button>
                     </LinkContainer>
-                    <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(product._id)}>
-                      <FaTrash style={{color:'white'}}/>
+                    <Button
+                      variant="danger"
+                      className="btn-sm"
+                      onClick={() => deleteHandler(product._id)}
+                    >
+                      <FaTrash style={{ color: "white" }} />
                     </Button>
                   </td>
                 </tr>
