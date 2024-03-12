@@ -3,7 +3,6 @@ import {
   Col,
   ListGroup,
   Image,
-  Form,
   Card,
   Button,
 } from "react-bootstrap";

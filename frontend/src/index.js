@@ -20,6 +20,7 @@ import OrderScreen from "./screens/OrderScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import AdminRoute from "./components/AdminRoute";
 import OrderListScreen from "./screens/admin/OrderListScreen";
+import ProductListScreen from "./screens/admin/ProductListScreen";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
           {
             path: "/admin/orderList",
             element: <OrderListScreen />,
+          },
+          {
+            path: "/admin/productList",
+            element: <ProductListScreen />,
           },
         ],
       },
