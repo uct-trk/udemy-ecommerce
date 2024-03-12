@@ -27,7 +27,6 @@ const ProfileScreen = () => {
     isLoading,
     isError: ordersError,
   } = useGetMyOrdersQuery();
-  console.log(orders);
   useEffect(() => {
     if (userInfo) {
       setName(userInfo.name);

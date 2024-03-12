@@ -14,8 +14,6 @@ const ProductListScreen = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery();
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation();
-  console.log(error);
-  console.log(products);
 
   const createProductHandler = async () => {
     if (window.confirm("Are you sure you want to create")) {
