@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const UserListScreen = () => {
   const { data: users, isLoading, isError, refetch } = useGetUsersQuery();
   const [deleteUser] = useDeleteUserMutation();
-  
+
   const deleteHandler = async (id) => {
     if (window.confirm("Are you sure you want to delete")) {
       try {
@@ -28,7 +28,7 @@ const UserListScreen = () => {
 
   return (
     <>
-      <h1>Orders</h1>
+      <h1>Users</h1>
       {isLoading ? (
         <Loader />
       ) : isError ? (
@@ -59,20 +59,26 @@ const UserListScreen = () => {
                     <FaTimes style={{ color: "red" }} />
                   )}
                 </td>
-
                 <td>
-                  <LinkContainer to={`admin/user/${user._id}/edit`}>
-                    <Button variant="light" className="btn-sm">
-                      <FaEdit />
-                    </Button>
-                  </LinkContainer>
-                  <Button
-                    variant="danger"
-                    className="btn-sm"
-                    onClick={() => deleteHandler(user._id)}
-                  >
-                    <FaTrash color="white" />
-                  </Button>
+                  {!user.isAdmin && (
+                    <>
+                      <LinkContainer
+                        to={`/admin/user/${user._id}/edit`}
+                        style={{ marginRight: "10px" }}
+                      >
+                        <Button variant="light" className="btn-sm">
+                          <FaEdit />
+                        </Button>
+                      </LinkContainer>
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => deleteHandler(user._id)}
+                      >
+                        <FaTrash style={{ color: "white" }} />
+                      </Button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}
