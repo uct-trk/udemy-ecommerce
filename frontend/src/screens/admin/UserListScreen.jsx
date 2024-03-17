@@ -4,12 +4,27 @@ import { LinkContainer } from "react-router-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
-import { useGetUsersQuery } from "../../slices/usersApiSlice";
+import {
+  useDeleteUserMutation,
+  useGetUsersQuery,
+} from "../../slices/usersApiSlice";
+import { toast } from "react-toastify";
 
 const UserListScreen = () => {
   const { data: users, isLoading, isError, refetch } = useGetUsersQuery();
-
-  const deleteHandler = (id) => {};
+  const [deleteUser] = useDeleteUserMutation();
+  
+  const deleteHandler = async (id) => {
+    if (window.confirm("Are you sure you want to delete")) {
+      try {
+        await deleteUser(id).unwrap();
+        toast.success("User deleted successfully");
+        refetch();
+      } catch (error) {
+        toast.error(error);
+      }
+    }
+  };
 
   return (
     <>
@@ -56,7 +71,7 @@ const UserListScreen = () => {
                     className="btn-sm"
                     onClick={() => deleteHandler(user._id)}
                   >
-                    <FaTrash color="white"/>
+                    <FaTrash color="white" />
                   </Button>
                 </td>
               </tr>
