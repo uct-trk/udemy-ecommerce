@@ -47,9 +47,17 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     deleteProduct: builder.mutation({
       query: (productId) => ({
         url: `${PRODUCTS_URL}/${productId}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      providesTags: ['Product'],
+      providesTags: ["Product"],
+    }),
+    createReview: builder.mutation({
+      query: (data) => ({
+        url: `${PRODUCTS_URL}/${data.productId}/reviews`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Product"],
     }),
   }),
 });
@@ -61,5 +69,6 @@ export const {
   useCreateProductMutation,
   useUpdateProductMutation,
   useUploadProductImageMutation,
-  useDeleteProductMutation
+  useDeleteProductMutation,
+  useCreateReviewMutation,
 } = productsApiSlice;
