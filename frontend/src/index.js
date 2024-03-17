@@ -35,6 +35,10 @@ const router = createBrowserRouter([
         element: <HomeScreen />,
       },
       {
+        path: "/page/:pageNumber",
+        element: <HomeScreen />,
+      },
+      {
         path: "/product/:id",
         element: <ProductScreen />,
       },
@@ -86,6 +90,10 @@ const router = createBrowserRouter([
           },
           {
             path: "/admin/productList",
+            element: <ProductListScreen />,
+          },
+          {
+            path: "/admin/productList/:pageNumber",
             element: <ProductListScreen />,
           },
           {
