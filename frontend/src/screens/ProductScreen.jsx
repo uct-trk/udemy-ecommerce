@@ -20,6 +20,7 @@ import { useState } from "react";
 import { addToCart } from "../slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Meta from "../components/Meta";
 
 const ProductScreen = () => {
   const [qty, setQty] = useState(1);
@@ -72,6 +73,7 @@ const ProductScreen = () => {
         <Message variant="danger">{error?.data || error?.message}</Message>
       ) : (
         <>
+         <Meta title={product.name} description={product.description}/>
           <Link className="btn btn-light my-3" to="/">
             Go Back
           </Link>
